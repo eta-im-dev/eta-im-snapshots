@@ -925,7 +925,8 @@ void ClientStream::srvProcessNext()
 void ClientStream::doReadyRead()
 {
 	//QGuardedPtr<QObject> self = this;
-	readyRead();
+	if (isActive())
+		emit readyRead();
 	//if(!self)
 	//	return;
 	//d->in_rrsig = false;
@@ -1425,6 +1426,11 @@ void ClientStream::setSMState(ClientStream::SMState state) {
 QStringList ClientStream::hosts() const
 {
 	return d->client.hosts;
+}
+
+const StreamFeatures &ClientStream::streamFeatures() const
+{
+	return d->client.features;
 }
 
 

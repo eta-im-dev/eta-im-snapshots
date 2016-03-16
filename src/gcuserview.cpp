@@ -27,7 +27,6 @@
 #include <QMimeData>
 #include <QMenu>
 
-#include "capsmanager.h"
 #include "psitooltip.h"
 #include "psiaccount.h"
 #include "userlist.h"
@@ -38,6 +37,7 @@
 #include "coloropt.h"
 #include "avcall/avcall.h"
 #include "xmpp_muc.h"
+#include "xmpp_caps.h"
 #include "avatars.h"
 
 static bool caseInsensitiveLessThan(const QString &s1, const QString &s2)
@@ -204,9 +204,11 @@ public:
 				UserListItem u;
 				const QString &nick = item->text(0);
 				Jid caps_jid(/*s.mucItem().jid().isEmpty() ? */ dlg->jid().withResource(nick) /* : s.mucItem().jid()*/);
-				QString client_name = dlg->account()->capsManager()->clientName(caps_jid);
-				QString client_version = (client_name.isEmpty() ? QString() : dlg->account()->capsManager()->clientVersion(caps_jid));
+				CapsManager *cm = dlg->account()->client()->capsManager();
+				QString client_name = cm->clientName(caps_jid);
+				QString client_version = (client_name.isEmpty() ? QString() : cm->clientVersion(caps_jid));
 				UserResource ur;
+				ur.setStatus(item->s);
 				ur.setClient(client_name,client_version,"");
 				u.userResourceList().append(ur);
 				QStringList clients = u.clients();
@@ -549,9 +551,10 @@ bool GCUserView::maybeTip(const QPoint &pos)
 	u.setName(nick);
 
 	// Find out capabilities info
-	Jid caps_jid(/*s.mucItem().jid().isEmpty() ? */dlg->jid().withResource(nick)/* : s.mucItem().jid()*/);
-	QString client_name = dlg->account()->capsManager()->clientName(caps_jid);
-	QString client_version = (client_name.isEmpty() ? QString() : dlg->account()->capsManager()->clientVersion(caps_jid));
+	Jid caps_jid(dlg->jid().withResource(nick));
+	CapsManager *cm = dlg->account()->client()->capsManager();
+	QString client_name = cm->clientName(caps_jid);
+	QString client_version = (client_name.isEmpty() ? QString() : cm->clientVersion(caps_jid));
 
 	// make a resource so the contact appears online
 	UserResource ur;
@@ -616,7 +619,7 @@ void GCUserView::doContextMenu(QTreeWidgetItem *i)
 
 	act = new QAction(tr("E&xecute Command"), pm);
 	pm->addAction(act);
-	act->setData(50);
+	act->setData(6);
 
 	pm->addSeparator();
 

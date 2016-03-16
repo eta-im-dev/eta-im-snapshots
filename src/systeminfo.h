@@ -15,16 +15,14 @@ class SystemInfo : public QObject
 public:
 	static SystemInfo* instance();
 	const QString& os() const { return os_str_; }
-	int timezoneOffset() const { return timezone_offset_; }
-	const QString& timezoneString() const { return timezone_str_; }
+	const QString& osName() const { return os_name_str_; }
+	const QString& osVersion() const { return os_version_str_; }
 
 private:
 	SystemInfo();
 
 	static SystemInfo* instance_;
-	int timezone_offset_;
-	QString timezone_str_;
-	QString os_str_;
+	QString os_str_, os_name_str_, os_version_str_;
 };
 
 #endif

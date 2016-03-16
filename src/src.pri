@@ -15,7 +15,6 @@ unix:!mac:DEFINES += HAVE_X11
 include($$PWD/protocol/protocol.pri)
 include($$PWD/irisprotocol/irisprotocol.pri)
 include($$PWD/privacy/privacy.pri)
-include($$PWD/capabilities/capabilities.pri)
 include($$PWD/tabs/tabs.pri)
 include($$PWD/Certificates/Certificates.pri)
 include($$PWD/contactmanager/contactmanager.pri)
@@ -167,8 +166,6 @@ HEADERS += \
 	$$PWD/xdata_widget.h \
 	$$PWD/statuspreset.h \
 	$$PWD/lastactivitytask.h \
-	$$PWD/entitytimetask.h \
-	$$PWD/timeserver.h \
 	$$PWD/bobfilecache.h \
 	$$PWD/mucmanager.h \
 	$$PWD/mucconfigdlg.h \
@@ -184,7 +181,6 @@ HEADERS += \
 	$$PWD/activitycatalog.h \
 	$$PWD/activitydlg.h \
 	$$PWD/geolocation.h \
-	$$PWD/physicallocation.h \
 	$$PWD/urlbookmark.h \
 	$$PWD/conferencebookmark.h \
 	$$PWD/bookmarkmanager.h \
@@ -217,21 +213,11 @@ HEADERS += \
 	$$PWD/coloropt.h \
 	$$PWD/geolocationdlg.h \
 	$$PWD/rosteravatarframe.h \
-	$$PWD/sendbuttonmenu.h
-
-
-
-HEADERS += tabcompletion.h
-SOURCES += tabcompletion.cpp
-
-HEADERS += alertmanager.h
-SOURCES += alertmanager.cpp
-
-HEADERS += accountloginpassword.h
-SOURCES += accountloginpassword.cpp
-
-HEADERS += mcmdcompletion.h
-SOURCES += mcmdcompletion.cpp
+	$$PWD/psicapsregsitry.h \
+	$$PWD/tabcompletion.h \
+	$$PWD/alertmanager.h \
+	$$PWD/accountloginpassword.h \
+	$$PWD/mcmdcompletion.h
 
 # Source files
 SOURCES += \
@@ -311,8 +297,6 @@ SOURCES += \
 	$$PWD/psiactionlist.cpp \
 	$$PWD/xdata_widget.cpp \
 	$$PWD/lastactivitytask.cpp \
-	$$PWD/entitytimetask.cpp \
-	$$PWD/timeserver.cpp \
 	$$PWD/bobfilecache.cpp \
 	$$PWD/statuspreset.cpp \
 	$$PWD/mucmanager.cpp \
@@ -329,7 +313,6 @@ SOURCES += \
 	$$PWD/activitycatalog.cpp \
 	$$PWD/activitydlg.cpp \
 	$$PWD/geolocation.cpp \
-	$$PWD/physicallocation.cpp \
 	$$PWD/urlbookmark.cpp \
 	$$PWD/conferencebookmark.cpp \
 	$$PWD/bookmarkmanager.cpp \
@@ -360,7 +343,11 @@ SOURCES += \
 	$$PWD/coloropt.cpp \
 	$$PWD/geolocationdlg.cpp \
 	$$PWD/rosteravatarframe.cpp \
-	$$PWD/sendbuttonmenu.cpp
+	$$PWD/tabcompletion.cpp \
+	$$PWD/psicapsregsitry.cpp \
+	$$PWD/alertmanager.cpp \
+	$$PWD/accountloginpassword.cpp \
+	$$PWD/mcmdcompletion.cpp
 
 unix:!macx:!haiku {
 	HEADERS += $$PWD/x11windowsystem.h
@@ -602,8 +589,7 @@ FORMS += \
 	$$PWD/ahcommanddlg.ui \
 	$$PWD/ahcformdlg.ui \
 	$$PWD/geolocation.ui \
-	$$PWD/rosteravatarframe.ui \
-	$$PWD/sendbuttontemplateseditor.ui
+	$$PWD/rosteravatarframe.ui
 
 # options dialog
 include($$PWD/options/options.pri)
